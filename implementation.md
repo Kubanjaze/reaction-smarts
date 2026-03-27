@@ -33,6 +33,22 @@ Outputs: reaction_applicability.csv, reaction_heatmap.png
 - reaction_applicability.csv: compound × reaction — 1 if applicable, 0 if not
 - reaction_heatmap.png: heatmap compound × reaction with family color bar
 
+## Key Concepts
+- RDKit reaction SMARTS (`AllChem.ReactionFromSmarts`, `RunReactants`)
+- Reactant substructure matching for synthetic feasibility
+- Coverage of 6 common medicinal chemistry reactions (amide, ester, reductive amination, sulfonamide, Buchwald, Suzuki)
+
+## Verification Checklist
+- [x] 45/45 compounds parsed without SMILES failures
+- [x] reaction_applicability.csv contains compound x reaction binary matrix
+- [x] reaction_heatmap.png saved to output/
+- [x] Only Buchwald and Suzuki applicable (8/45 compounds with Cl/Br handles)
+- [x] No false positives: 4 non-applicable reactions correctly return 0/45
+
+## Risks
+- Reaction SMARTS only check for reactant substructure presence, not synthetic yield or selectivity
+- Multi-reactant reactions tested in single-reactant mode may miss valid transformations requiring two substrates
+
 ## Actual Results (v1.1)
 
 | Reaction | Applicable | Notes |
